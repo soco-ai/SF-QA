@@ -1,6 +1,5 @@
 import soco_openqa.helper as helper
-from soco_mrc.mrc_model import MrcModel
-from soco_openqa.soco_mrc.mrc_reranker import MRCRerankerModel
+from soco_openqa.soco_mrc.mrc_model import MrcModel, MrcRerankerModel
 from soco_openqa.cloud_bucket import CloudBucket
 from collections import defaultdict
 import numpy as np
@@ -10,10 +9,10 @@ class Reader(object):
     def __init__(self, config):
         gpu_request = config.param.n_gpu
         n_gpu = helper.find_device(gpu_request)
-        print('number gpus: {}'.format(n_gpu))
+        print('number of gpus: {}'.format(n_gpu))
 
         if config.reader.use_reranker:
-            self.reader = MRCRerankerModel('us', use_gpu=True if n_gpu > 0 else False)
+            self.reader = MrcRerankerModel('us', n_gpu=n_gpu)
             self.use_reranker = True
             self.rerank_size = config.reader.rerank_size
         else:
@@ -21,8 +20,8 @@ class Reader(object):
             self.use_reranker = False
         self.model_id = config.reader.model_id
         self.thresh = config.param.score_weight
-        self.cloud_bucket = CloudBucket('us')
-        self.cloud_bucket.download_model('mrc-models', self.model_id)
+        # self.cloud_bucket = CloudBucket('us')
+        # self.cloud_bucket.download_model('mrc-models', self.model_id)
 
     def predict(self, query, top_passages):
         batch = [{'q': query, 'doc': p['answer']} for p in top_passages]

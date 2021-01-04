@@ -22,3 +22,27 @@ reader:
 
 exact_match=41.845 f1=47.967 R@1=50.757
 
+********************
+2021-01-04T14:58:04
+config_name: squad-sparta-spanbert
+data:
+  lang: en
+  name: squad
+  split: dev-v1.1.json
+param:
+  n_gpu: 2
+  score_weight: 0.8
+  top_k: 1
+ranker:
+  cached_ranker_file: squad_dev_wiki_sparta_2016sparta.json
+  model:
+    es_index_name: null
+    name: null
+  use_cached: true
+reader:
+  model_id: squad-ds-context-global-norm-2016sparta-from-pt
+  rerank_size: null
+  use_reranker: false
+
+exact_match=41.845 f1=47.967 R@1=50.757
+

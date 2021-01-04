@@ -78,3 +78,27 @@ exact_match=40.937 f1=48.452 R@1=32.942 R@5=53.179 R@10=60.653 R@50=75.459 R@100
 }
 exact_match=51.599 f1=59.154 R@1=43.198 R@5=64.598 R@10=71.523 R@50=82.904 R@100=86.604
 
+********************
+2021-01-04T18:12:11
+config_name: bertserini-ds-new-ranker
+data:
+  lang: en
+  name: squad
+  split: dev-v1.1.json
+param:
+  n_gpu: 1
+  score_weight: 0.9
+  top_k: 10
+ranker:
+  cached_ranker_file: squad_dev_bm25_wiki_2016_en_ctx_bm25_serini.json
+  model:
+    es_index_name: null
+    name: null
+  use_cached: true
+reader:
+  model_id: squad-ds-para-serini-global-norm-2016bm25-bert-base-cased-from-pt
+  rerank_size: null
+  use_reranker: false
+
+exact_match=45.629 f1=52.962 R@1=43.198 R@5=64.598 R@10=71.523
+

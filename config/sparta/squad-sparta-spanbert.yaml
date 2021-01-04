@@ -8,6 +8,6 @@ ranker:
 reader:
     model_id: squad-ds-context-global-norm-2016sparta-from-pt
 param:
-    n_gpu: 1
+    n_gpu: 2
     score_weight: 0.8
-    top_k: 50
+    top_k: 10

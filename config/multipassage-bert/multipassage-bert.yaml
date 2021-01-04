@@ -10,5 +10,6 @@ reader:
     use_reranker: True
     rerank_size: 30
 param:
+    n_gpu: 1
     score_weight: 0.9
-    top_k: 100
+    top_k: 10
