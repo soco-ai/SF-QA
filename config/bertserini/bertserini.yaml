@@ -1,0 +1,12 @@
+data:
+    lang: en
+    name: squad
+    split: dev-v1.1.json
+ranker:
+    use_cached: True
+    cached_ranker_file: squad_dev_2016_wiki_chunk_ctx_bm25.json
+reader:
+    model_id: squad-chunk-global-norm-2016bm25-bert-base-uncased
+param:
+    score_weight: 0.8
+    top_k: 50

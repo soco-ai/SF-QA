@@ -1,0 +1,20 @@
+********************{
+ "data": {
+  "lang": "en",
+  "name": "squad/dev-v1.1"
+ },
+ "ranker": {
+  "use_cached": true,
+  "cached_ranker_id": "squad_dev_2016_wiki_chunk_ctx_bm25"
+ },
+ "reader": {
+  "model_id": "squad-chunk-global-norm-2016bm25-bert-base-uncased"
+ },
+ "param": {
+  "score_weight": 0.8,
+  "top_k": 100
+ },
+ "config_name": "bertserini"
+}
+exact_match=41.173 f1=48.598 R@1=41.854 R@5=62.923 R@10=70.350 R@50=83.103 R@100=83.103
+

@@ -1,0 +1,22 @@
+{
+ "data": {
+  "lang": "zh",
+  "name": "cmrc2018/dev-v1.1"
+ },
+ "ranker": {
+  "use_cached": false,
+  "model": {
+   "name": "sparta",
+   "es_index_name": "zh-wiki-frame-2020"
+  }
+ },
+ "reader": {
+  "model_id": "cmrc2018-ds-context-global-norm-2018sparta-from-pt-v1"
+ },
+ "param": {
+  "score_weight": 0.8,
+  "top_k": 10
+ },
+ "config_name": "online-eval-zh-cmrc2018-sparta-rbt"
+}
+exact_match=55.483 f1=72.940 R@1=64.368 R@5=78.565 R@10=82.355

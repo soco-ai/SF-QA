@@ -1,0 +1,23 @@
+
+********************{
+ "data": {
+  "lang": "en",
+  "name": "squad/dev-v1.1"
+ },
+ "ranker": {
+  "use_cached": true,
+  "cached_ranker_id": "squad_dev_bm25_wiki_2016_en_ctx_bm25_serini"
+ },
+ "reader": {
+  "model_id": "squad-chunk-global-norm-2016bm25-bert-large-reranker",
+  "use_reranker": true,
+  "rerank_size": 30
+ },
+ "param": {
+  "score_weight": 0.9,
+  "top_k": 100
+ },
+ "config_name": "multipassage-bert"
+}
+exact_match=53.179 f1=60.712 R@1=43.198 R@5=64.598 R@10=71.523 R@50=82.904 R@100=86.604
+

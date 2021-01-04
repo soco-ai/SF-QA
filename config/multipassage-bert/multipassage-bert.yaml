@@ -1,0 +1,14 @@
+data:
+    lang: en
+    name: squad
+    split: dev-v1.1.json
+ranker:
+    use_cached: True
+    cached_ranker_file: squad_dev_bm25_wiki_2016_en_ctx_bm25_serini.json
+reader:
+    model_id: squad-chunk-global-norm-2016bm25-bert-large-reranker
+    use_reranker: True
+    rerank_size: 30
+param:
+    score_weight: 0.9
+    top_k: 100

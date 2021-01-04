@@ -1,0 +1,12 @@
+data:
+    lang: zh
+    name: drcd
+    split: dev-v1.1.json
+ranker:
+    use_cached: True
+    cached_ranker_file: drcd_dev_zh-wiki-frame-2017_sparta.json
+reader:
+    model_id: drcd-ds-context-global-norm-2017sparta-from-pt-v1
+param:
+    score_weight: 0.9
+    top_k: 50

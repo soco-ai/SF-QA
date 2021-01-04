@@ -1,0 +1,14 @@
+data:
+    lang: zh
+    name: cmrc2018
+    split: dev-v1.1.json
+ranker:
+    use_cached: False
+    model:
+        name: sparta
+        es_index_name: zh-wiki-frame-2020
+reader:
+    model_id: cmrc2018-ds-context-global-norm-2018sparta-from-pt-v1
+param:
+    score_weight: 0.8
+    top_k: 10

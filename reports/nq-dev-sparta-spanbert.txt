@@ -1,0 +1,21 @@
+********************{
+ "data": {
+  "lang": "en",
+  "name": "nq-open/dev-v1.1"
+ },
+ "ranker": {
+  "use_cached": true,
+  "cached_ranker_id": "nq-open_dev_wiki-frame-2018_sparta"
+ },
+ "reader": {
+  "model_id": "nq-ds-context-global-norm-2018sparta-from-pt-v1"
+ },
+ "param": {
+  "n_gpu": 2,
+  "score_weight": 0.8,
+  "top_k": 50
+ },
+ "config_name": "nq-dev-sparta-spanbert"
+}
+exact_match=36.782 f1=47.441 R@1=27.761 R@5=49.572 R@10=57.086 R@50=69.190 R@100=69.190
+

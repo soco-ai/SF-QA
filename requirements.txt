@@ -1,0 +1,9 @@
+torch>=1.6.0
+numpy>=1.16.3
+elasticsearch >= 7.0.3
+soco-encoders>=0.2.1
+soco-mrc==0.0.9
+soco-device==0.0.5.2
+pyyaml==5.3.1
+yacs==0.1.8
+transformers==2.11.0

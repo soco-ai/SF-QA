@@ -1,0 +1,44 @@
+********************{
+ "data": {
+  "lang": "en",
+  "name": "nq-open/test-v1.1"
+ },
+ "ranker": {
+  "use_cached": true,
+  "cached_ranker_id": "nq-open_test_wiki-frame-2018_sparta"
+ },
+ "reader": {
+  "model_id": "nq-ds-context-global-norm-2018sparta-from-pt-v1"
+ },
+ "param": {
+  "n_gpu": 2,
+  "score_weight": 0.8,
+  "top_k": 50
+ },
+ "config_name": "nq-test-sparta-spanbert"
+}
+exact_match=37.452 f1=46.237 R@1=28.643 R@5=51.828 R@10=59.778 R@50=73.296 R@100=73.296
+
+********************
+2021-01-03T01:31:40
+config_name: nq-test-sparta-spanbert
+data:
+  lang: en
+  name: nq-open/test-v1.1
+param:
+  n_gpu: 1
+  score_weight: 0.8
+  top_k: 10
+ranker:
+  cached_ranker_id: nq-open_test_wiki-frame-2018_sparta
+  model:
+    es_index_name: null
+    name: null
+  use_cached: true
+reader:
+  model_id: nq-ds-context-global-norm-2018sparta-from-pt-v1
+  rerank_size: null
+  use_reranker: false
+
+exact_match=35.263 f1=44.140 R@1=28.643 R@5=51.828 R@10=59.778
+

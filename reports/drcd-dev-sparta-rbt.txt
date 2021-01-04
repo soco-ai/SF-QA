@@ -1,0 +1,150 @@
+********************{
+ "data": {
+  "lang": "zh",
+  "name": "drcd/dev-v1.1"
+ },
+ "ranker": {
+  "use_cached": true,
+  "cached_ranker_id": "drcd_dev_zh-wiki-frame-2017_sparta"
+ },
+ "reader": {
+  "model_id": "drcd-ds-context-global-norm-2017sparta-from-pt-v1"
+ },
+ "param": {
+  "score_weight": 0.8,
+  "top_k": 50
+ },
+ "config_name": "drcd-dev-sparta-rbt"
+}
+exact_match=61.975 f1=73.576 R@1=60.471 R@5=74.461 R@10=78.547 R@50=86.237 R@100=86.237
+
+********************{
+ "data": {
+  "lang": "zh",
+  "name": "drcd/dev-v1.1"
+ },
+ "ranker": {
+  "use_cached": true,
+  "cached_ranker_id": "drcd_dev_zh-wiki-frame-2017_sparta"
+ },
+ "reader": {
+  "model_id": "drcd-ds-context-global-norm-2017sparta-from-pt-v1"
+ },
+ "param": {
+  "score_weight": 0.9,
+  "top_k": 50
+ },
+ "config_name": "drcd-dev-sparta-rbt"
+}
+exact_match=63.025 f1=74.535 R@1=60.471 R@5=74.461 R@10=78.547 R@50=86.237 R@100=86.237
+
+********************
+config_name: drcd-dev-sparta-rbt
+data:
+  lang: zh
+  name: drcd/dev-v1.1
+param:
+  n_gpu: 2
+  score_weight: 0.9
+  top_k: 1
+ranker:
+  cached_ranker_id: drcd_dev_zh-wiki-frame-2017_sparta
+  use_cached: true
+reader:
+  model_id: drcd-ds-context-global-norm-2017sparta-from-pt-v1
+  rerank_size: null
+  use_reranker: false
+
+exact_match=50.341 f1=61.127 R@1=60.471 R@5=60.471 R@10=60.471 R@50=60.471 R@100=60.471
+
+********************
+config_name: drcd-dev-sparta-rbt
+data:
+  lang: zh
+  name: drcd/dev-v1.1
+param:
+  n_gpu: 2
+  score_weight: 0.9
+  top_k: 1
+ranker:
+  cached_ranker_id: drcd_dev_zh-wiki-frame-2017_sparta
+  model:
+    es_index_name: null
+    name: null
+  use_cached: true
+reader:
+  model_id: drcd-ds-context-global-norm-2017sparta-from-pt-v1
+  rerank_size: null
+  use_reranker: false
+
+exact_match=50.341 f1=61.127 R@1=60.471 R@5=60.471 R@10=60.471 R@50=60.471 R@100=60.471
+
+********************
+config_name: drcd-dev-sparta-rbt
+data:
+  lang: zh
+  name: drcd/dev-v1.1
+param:
+  n_gpu: 2
+  score_weight: 0.9
+  top_k: 1
+ranker:
+  cached_ranker_id: drcd_dev_zh-wiki-frame-2017_sparta
+  model:
+    es_index_name: null
+    name: null
+  use_cached: true
+reader:
+  model_id: drcd-ds-context-global-norm-2017sparta-from-pt-v1
+  rerank_size: null
+  use_reranker: false
+
+exact_match=50.341 f1=61.127 R@1=60.471
+
+********************
+2021-01-03T02:18:17
+config_name: drcd-dev-sparta-rbt
+data:
+  lang: zh
+  name: drcd/dev-v1.1
+param:
+  n_gpu: 2
+  score_weight: 0.9
+  top_k: 1
+ranker:
+  cached_ranker_id: drcd_dev_zh-wiki-frame-2017_sparta
+  model:
+    es_index_name: null
+    name: null
+  use_cached: true
+reader:
+  model_id: drcd-ds-context-global-norm-2017sparta-from-pt-v1
+  rerank_size: null
+  use_reranker: false
+
+exact_match=50.341 f1=61.127 R@1=60.471
+
+********************
+2021-01-03T23:23:15
+config_name: drcd-dev-sparta-rbt
+data:
+  lang: zh
+  name: drcd
+  split: dev-v1.1.json
+param:
+  n_gpu: 2
+  score_weight: 0.9
+  top_k: 1
+ranker:
+  cached_ranker_file: drcd_dev_zh-wiki-frame-2017_sparta.json
+  model:
+    es_index_name: null
+    name: null
+  use_cached: true
+reader:
+  model_id: drcd-ds-context-global-norm-2017sparta-from-pt-v1
+  rerank_size: null
+  use_reranker: false
+
+exact_match=50.341 f1=61.127 R@1=60.471
+

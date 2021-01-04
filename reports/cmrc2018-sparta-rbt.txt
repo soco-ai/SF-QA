@@ -1,0 +1,20 @@
+********************{
+ "data": {
+  "lang": "zh",
+  "name": "cmrc2018/dev-v1.1"
+ },
+ "ranker": {
+  "use_cached": true,
+  "cached_ranker_id": "cmrc2018_dev_zh-wiki-frame-2018_sparta"
+ },
+ "reader": {
+  "model_id": "cmrc2018-ds-context-global-norm-2018sparta-from-pt-v1"
+ },
+ "param": {
+  "score_weight": 0.8,
+  "top_k": 50
+ },
+ "config_name": "cmrc2018-sparta-rbt"
+}
+exact_match=63.063 f1=80.202 R@1=70.053 R@5=83.318 R@10=87.232 R@50=93.476 R@100=93.476
+

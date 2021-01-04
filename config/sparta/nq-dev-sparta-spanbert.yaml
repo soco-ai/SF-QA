@@ -1,0 +1,13 @@
+data:
+    lang: en
+    name: nq-open
+    split: dev-v1.1.json
+ranker:
+    use_cached: True
+    cached_ranker_file: nq-open_dev_wiki-frame-2018_sparta.json
+reader:
+    model_id: nq-ds-context-global-norm-2018sparta-from-pt-v1
+param:
+    n_gpu: 2
+    score_weight: 0.8
+    top_k: 100
