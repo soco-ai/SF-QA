@@ -41,7 +41,7 @@ class OpenQA(object):
         no_ans_cnt = 0
         logger.info("Execution started")
         for d in tqdm(data['data']):
-            for p in d['paragraphs']:
+            for p in tqdm(d['paragraphs']):
                 for qa in p['qas']:
                     if len(predictions) > 0 and len(predictions) % 1000 == 0:
                         logger.info("{}: {} no answer".format(len(predictions), no_ans_cnt))
