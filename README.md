@@ -51,12 +51,7 @@ pip install -r requirements.txt
 
 ## Usage 1: Ask questions and interact with open-QA demo
 
-### 1. Set API key
-```
-export API_KEY=<your-api-key>
-```
-
-### 2. In `demo.py`, set reader model and ranker index you want to try from the following list:
+### 1. In `demo.py`, set reader model and ranker index you want to try from the following list:
 
 * reader model available: 
     * English:
@@ -73,7 +68,7 @@ export API_KEY=<your-api-key>
     * Chinese:
         - sparta-zh-wiki-2020
 
-### 3. Run demo file
+### 2. Run demo file
 
 ```
 python demo.py
