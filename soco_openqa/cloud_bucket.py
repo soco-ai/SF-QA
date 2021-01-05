@@ -2,6 +2,7 @@ import boto3
 import oss2
 import os
 import time
+from tqdm import tqdm
 
 
 class CloudBucket(object):
@@ -30,7 +31,7 @@ class CloudBucket(object):
     def download(self, folder_dir, files, local_dir):
         print('start downloading {} to {} ...'.format(files, local_dir))
         start = time.time()
-        for f in files:
+        for f in tqdm(files, desc='downloading files'):
             try:
                 if self.region.lower() == 'cn':
                     self._oss_bucket.get_object_to_file('{}/{}'.format(folder_dir, f), os.path.join(local_dir, f))
