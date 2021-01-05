@@ -49,7 +49,39 @@ pip install -r requirements.txt
 # How to use SFQA
 
 
-## Evaluate using config file
+## Usage 1: Ask questions and interact with open-QA demo
+
+### 1. Set API key
+```
+export API_KEY=<your-api-key>
+```
+
+### 2. In `demo.py`, set reader model and ranker index you want to try from the following list:
+
+* reader model available: 
+    * English:
+        - squad-ds-context-global-norm-2016sparta-from-pt
+        - squad-chunk-global-norm-2016bm25-bert-base-uncased
+    * Chinese:
+        - cmrc2018-ds-context-global-norm-2018sparta-from-pt-v1
+        - drcd-ds-context-global-norm-2017sparta-from-pt-v1
+
+* ranker index available:
+    * English:
+        - sparta-en-wiki-2016
+        - bm25-en-wiki-2016
+    * Chinese:
+        - sparta-zh-wiki-2020
+
+### 3. Run demo file
+
+```
+python demo.py
+```
+
+
+
+## Usage 2: Reproduce previous research result 
 Run the script to evaluate open QA with config.yaml file under `./config` folder.
 ```
 python example.py --config ./config/sparta/squad-sparta-spanbert.yaml
@@ -73,19 +105,10 @@ param:
 ```
 
 
-## SF-QA python examples
 
-### TBD
+---
 
-```python
-from open_soco import MRC, Ranker
-mrc = MRC(model='spenbert', score_combine='linear')
-ranker = Ranker(model='sparter0.1', source='wikipedia', year=2016)
-qa = QA(ranker, mrc)
-result = qa.query('what year did Pittsburgh win the superbowl?')
-```
-
-### SF-QA APIs
+## SF-QA APIs
 - POST
 	- https://api.soco.ai/v1/sfqa/query
 - Header
