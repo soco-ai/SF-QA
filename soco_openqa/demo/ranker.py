@@ -26,7 +26,7 @@ class Ranker:
         :return: a list of dictionaries containing topn retrieved answers
         :rtype: list
         """
-        headers = {"Accept": "application/json", "Authorization": os.environ.get('API_KEY')}
+        headers = {"Accept": "application/json", "Authorization": 'soco_research'}
         json_body = {   
             "lang": self.index['lang'],
             "index": self.index['index'],
