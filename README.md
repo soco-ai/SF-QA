@@ -179,24 +179,6 @@ The processed Wikipedia can be downloaded in the following links:
 
 Please contact to contact@soco.ai to contribute your cached retrieval results. 
 
-## JSON Format
-```json
-{
-  "answer": 
-    {
-      "context": "05:22:09:12 Off. 05:22:09:12 Off is an album by Industrial/EBM group Front 242. It was released by Sony on 2 November 1993 (see 1993 in music). The album's title is a simple substitution cipher for the word \"evil\"; where each letter is represented by its equivalent numerical position in the alphabet.", 
-      "answer_start": 80, 
-      "value": "It was released by Sony on 2 November 1993 (see 1993 in music).", 
-    }, 
-  "meta": 
-    {
-      "chunk_id": "273c701f-ea08-4ac7-8bb2-3097a0b8b541", 
-      "chunk_type": "content", 
-      "doc_id": "05:22:09:12 Off", 
-      "year": "2016"
-    }
-}
-```
 
 # How to Contribute
 Contribution is welcomed to this project!
