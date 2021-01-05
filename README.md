@@ -173,7 +173,7 @@ The processed Wikipedia can be downloaded in the following links:
 - Sentence Level: [wiki_2016](https://sfqa.s3.us-east-2.amazonaws.com/wikidump/2016/wiki_2016_frames.jsonl.bz2)
 - Phrase Level: You can use either paragraph level wiki or sentence level wiki to get n-best passages, then get the 1-best phrase using a machine reader. 
 
-## Cashed Retrieval Results 
+## Cached Retrieval Results 
 - [Wiki_2016_BM25](https://sfqa.s3.us-east-2.amazonaws.com/data/wiki-frame-2016_sent_bm25_context.json)
 - [Wiki_2016_SPARTA](https://sfqa.s3.us-east-2.amazonaws.com/data/wiki-frame-2016_sparta_context.json)
 
