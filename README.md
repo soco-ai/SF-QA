@@ -112,7 +112,7 @@ param:
 - POST
 	- https://api.soco.ai/v1/sfqa/query
 - Header
-	- Authorization: [Please contact at contact@soco.ai to get the autorization key]
+	- Authorization: soco_research
 	- Content-Type: application/json
 
 - Body
