@@ -118,98 +118,91 @@ class MrcModel(ModelBase):
         for batch in util.chunks(features, batch_size):
             padded = util.pad_batch(batch)
             input_ids, token_type_ids, attn_masks = padded
-            try:
-                with torch.no_grad():
-                    start_scores, end_scores = model(torch.tensor(input_ids).to(device),
-                                                    token_type_ids=torch.tensor(token_type_ids).to(device),
-                                                    attention_mask=torch.tensor(attn_masks).to(device))
-                    start_probs = torch.softmax(start_scores, dim=1)
-                    end_probs = torch.softmax(end_scores, dim=1)
 
-                for b_id in range(len(batch)):
-                    all_tokens = tokenizer.convert_ids_to_tokens(input_ids[b_id])
-                    legal_length = batch[b_id]['length']
-                    b_start_score = start_scores[b_id][0:legal_length]
-                    b_end_score = end_scores[b_id][0:legal_length]
-                    token2char = batch[b_id]['offset_mapping']
-                    for t_id in range(legal_length):
-                        if token2char[t_id] is None or token2char[t_id] == (0, 0):
-                            b_start_score[t_id] = -10000
-                            b_end_score[t_id] = -10000
+            with torch.no_grad():
+                start_scores, end_scores = model(torch.tensor(input_ids).to(device),
+                                                token_type_ids=torch.tensor(token_type_ids).to(device),
+                                                attention_mask=torch.tensor(attn_masks).to(device))
+                start_probs = torch.softmax(start_scores, dim=1)
+                end_probs = torch.softmax(end_scores, dim=1)
 
-                    _, top_start_id = torch.topk(b_start_score, 2, dim=0)
-                    _, top_end_id = torch.topk(b_end_score, 2, dim=0)
+            for b_id in range(len(batch)):
+                all_tokens = tokenizer.convert_ids_to_tokens(input_ids[b_id])
+                legal_length = batch[b_id]['length']
+                b_start_score = start_scores[b_id][0:legal_length]
+                b_end_score = end_scores[b_id][0:legal_length]
+                token2char = batch[b_id]['offset_mapping']
+                for t_id in range(legal_length):
+                    if token2char[t_id] is None or token2char[t_id] == (0, 0):
+                        b_start_score[t_id] = -10000
+                        b_end_score[t_id] = -10000
 
-                    s_prob = start_probs[b_id, top_start_id[0]].item()
-                    e_prob = end_probs[b_id, top_end_id[0]].item()
-                    s_logit = start_scores[b_id, top_start_id[0]].item()
-                    e_logit = end_scores[b_id, top_end_id[0]].item()
+                _, top_start_id = torch.topk(b_start_score, 2, dim=0)
+                _, top_end_id = torch.topk(b_end_score, 2, dim=0)
 
-                    prob = (s_prob + e_prob) / 2
-                    score = (s_logit + e_logit) / 2
+                s_prob = start_probs[b_id, top_start_id[0]].item()
+                e_prob = end_probs[b_id, top_end_id[0]].item()
+                s_logit = start_scores[b_id, top_start_id[0]].item()
+                e_logit = end_scores[b_id, top_end_id[0]].item()
 
-                    doc = batch[b_id]['doc']
-                    doc_offset = input_ids[b_id].index(102)
+                prob = (s_prob + e_prob) / 2
+                score = (s_logit + e_logit) / 2
 
-                    res = all_tokens[top_start_id[0]:top_end_id[0] + 1]
-                    char_offset = token2char[doc_offset + 1][0]
-                    example_idx = batch[b_id]['example_idx']
+                doc = batch[b_id]['doc']
+                doc_offset = input_ids[b_id].index(102)
 
-                    if not res or res[0] == "[CLS]" or res[0] == '[SEP]' or top_start_id[0].item() <= doc_offset:
-                        prediction = {'missing_warning': True,
-                                    'prob': prob,
-                                    'start_end_prob': [s_prob, e_prob],
-                                    'score': score,
-                                    'start_end_score': [s_logit, e_logit],
-                                    'value': "", 
-                                    'answer_start': -1,
-                                    'example_idx': example_idx}
+                res = all_tokens[top_start_id[0]:top_end_id[0] + 1]
+                char_offset = token2char[doc_offset + 1][0]
+                example_idx = batch[b_id]['example_idx']
+
+                if not res or res[0] == "[CLS]" or res[0] == '[SEP]' or top_start_id[0].item() <= doc_offset:
+                    prediction = {'missing_warning': True,
+                                'prob': prob,
+                                'start_end_prob': [s_prob, e_prob],
+                                'score': score,
+                                'start_end_score': [s_logit, e_logit],
+                                'value': "", 
+                                'answer_start': -1,
+                                'example_idx': example_idx}
+                else:
+                    if not merge_pred:
+                        start_map = token2char[top_start_id[0].item()]
+                        end_map = token2char[top_end_id[0].item()]
+                        span = [start_map[0] - char_offset, end_map[1] - char_offset]
+                        ans = doc[span[0]: span[1]]
                     else:
-                        if not merge_pred:
+                        base_idx = batch[b_id]['base_idx']
+                        orig_doc = batch[b_id]['orig_doc']
+                        orig_token2char = batch[b_id]['orig_offset_mapping']
+
+                        # map token index, then use offset mapping to map to original position
+                        orig_start_map = orig_token2char[top_start_id[0].item() + base_idx - doc_offset - 1]
+                        orig_end_map = orig_token2char[top_end_id[0].item() + base_idx - doc_offset - 1]
+                        span = [orig_start_map[0], orig_end_map[1]]
+                        ans = orig_doc[span[0]: span[1]]
+                        try:
                             start_map = token2char[top_start_id[0].item()]
                             end_map = token2char[top_end_id[0].item()]
-                            span = [start_map[0] - char_offset, end_map[1] - char_offset]
-                            ans = doc[span[0]: span[1]]
-                        else:
-                            base_idx = batch[b_id]['base_idx']
-                            orig_doc = batch[b_id]['orig_doc']
-                            orig_token2char = batch[b_id]['orig_offset_mapping']
+                            debug_span = [start_map[0] - char_offset, end_map[1] - char_offset]
+                            debug_ans = doc[debug_span[0]: debug_span[1]]
+                            assert debug_ans == ans
+                        except Exception as e:
+                            print(e)
+                            print('chunk ans: {} '.format(debug_ans))
+                            print('doc ans: {} '.format(ans))
+                            print('chunk span: {} vs doc span: {}'.format(debug_span, span))
 
-                            # map token index, then use offset mapping to map to original position
-                            orig_start_map = orig_token2char[top_start_id[0].item() + base_idx - doc_offset - 1]
-                            orig_end_map = orig_token2char[top_end_id[0].item() + base_idx - doc_offset - 1]
-                            span = [orig_start_map[0], orig_end_map[1]]
-                            ans = orig_doc[span[0]: span[1]]
-                            try:
-                                start_map = token2char[top_start_id[0].item()]
-                                end_map = token2char[top_end_id[0].item()]
-                                debug_span = [start_map[0] - char_offset, end_map[1] - char_offset]
-                                debug_ans = doc[debug_span[0]: debug_span[1]]
-                                assert debug_ans == ans
-                            except Exception as e:
-                                print(e)
-                                print('chunk ans: {} '.format(debug_ans))
-                                print('doc ans: {} '.format(ans))
-                                print('chunk span: {} vs doc span: {}'.format(debug_span, span))
+                    prediction = {'value': ans,
+                                'answer_start': span[0],
+                                'answer_span': span,
+                                'prob': prob,
+                                'start_end_prob': [s_prob, e_prob],
+                                'score': score,
+                                'start_end_score': [s_logit, e_logit],
+                                'tokens': res,
+                                'example_idx': example_idx}
 
-                        prediction = {'value': ans,
-                                    'answer_start': span[0],
-                                    'answer_span': span,
-                                    'prob': prob,
-                                    'start_end_prob': [s_prob, e_prob],
-                                    'score': score,
-                                    'start_end_score': [s_logit, e_logit],
-                                    'tokens': res,
-                                    'example_idx': example_idx}
-
-                    results.append(prediction)
-
-            except Exception as e:
-                logger.error(e)
-                logger.info(input_ids)
-                logger.info(token_type_ids)
-                logger.info(attn_masks)
-                import pdb; pdb.set_trace()
+                results.append(prediction)
                 
 
         # merge predictions
@@ -239,16 +232,10 @@ class MrcRerankerModel(ModelBase):
             input_ids, token_type_ids, attn_masks = padded
 
             with torch.no_grad():
-                try:
-                    start_scores, end_scores, cls_scores = model(torch.tensor(input_ids).to(device),
-                                                    token_type_ids=torch.tensor(token_type_ids).to(device),
-                                                    attention_mask=torch.tensor(attn_masks).to(device))
-                except:
-                    logger.info(input_ids.shape)
-                    logger.info(token_type_ids.shape)
-                    logger.info(attn_masks.shape)
-                    logger.info(attn_masks)
-                    import pdb; pdb.set_trace()
+                start_scores, end_scores, cls_scores = model(torch.tensor(input_ids).to(device),
+                                                token_type_ids=torch.tensor(token_type_ids).to(device),
+                                                attention_mask=torch.tensor(attn_masks).to(device))
+
                 start_probs = torch.softmax(start_scores, dim=1)
                 end_probs = torch.softmax(end_scores, dim=1)
                 cls_probs = torch.softmax(cls_scores, dim=1)

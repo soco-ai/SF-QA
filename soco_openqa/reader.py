@@ -1,6 +1,5 @@
 import soco_openqa.helper as helper
 from soco_openqa.soco_mrc.mrc_model import MrcModel, MrcRerankerModel
-from soco_openqa.cloud_bucket import CloudBucket
 from collections import defaultdict
 import numpy as np
 
@@ -20,8 +19,6 @@ class Reader(object):
             self.use_reranker = False
         self.model_id = config.reader.model_id
         self.thresh = config.param.score_weight
-        # self.cloud_bucket = CloudBucket('us')
-        # self.cloud_bucket.download_model('mrc-models', self.model_id)
 
     def predict(self, query, top_passages):
         batch = [{'q': query, 'doc': p['answer']} for p in top_passages]

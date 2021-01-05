@@ -12,4 +12,4 @@ reader:
 param:
     n_gpu: 1
     score_weight: 0.9
-    top_k: 10
+    top_k: 100
