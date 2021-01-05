@@ -169,13 +169,13 @@ When ranker_only is true, it will just return the sentence level answer in the v
 
 ## Preprocessed wikipedia dump 
 The processed Wikipedia can be downloaded in the following links:
-- Paragraph Level: [wiki_2016](https://sfqa.s3.us-east-2.amazonaws.com/wikidump/2016/wiki_2016_paragraphs.jsonl)
-- Sentence Level: [wiki_2016](https://sfqa.s3.us-east-2.amazonaws.com/wikidump/2016/wiki_2016_frames.jsonl)
+- Paragraph Level: [wiki_2016](https://sfqa.s3.us-east-2.amazonaws.com/wikidump/2016/wiki_2016_paragraphs.jsonl.bz2)
+- Sentence Level: [wiki_2016](https://sfqa.s3.us-east-2.amazonaws.com/wikidump/2016/wiki_2016_frames.jsonl.bz2)
 - Phrase Level: You can use either paragraph level wiki or sentence level wiki to get n-best passages, then get the 1-best phrase using a machine reader. 
 
 ## Cashed Retrieval Results 
-- [Wiki_2016_BM25]()
-- [Wiki_2016_SPARTA]()
+- [Wiki_2016_BM25](https://sfqa.s3.us-east-2.amazonaws.com/data/wiki-frame-2016_sent_bm25_context.json)
+- [Wiki_2016_SPARTA](https://sfqa.s3.us-east-2.amazonaws.com/data/wiki-frame-2016_sparta_context.json)
 
 Please contact to contact@soco.ai to contribute your cached retrieval results. 
 
