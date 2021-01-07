@@ -16,11 +16,11 @@
 </p>
 
 <h3 align="center">
-<p>A Simple and Fair Evaluation Library for Open-domain QuestionAnswering
+<p>A Simple and Fair Evaluation Library for Open-domain Question Answering
 </h3>
 
 # Introduction
-Oepn-domain QA Evaluation usually means days of tedious work on indexing large scale of data and building the pipeline. That's why we create SF-QA.
+Oepn-domain QA Evaluation usually means days of tedious work on indexing large scale of data and building the pipeline. That's why we create SF-QA [[paper]](https://arxiv.org/abs/2101.01910).
 
 We make the evaluation process simple and fast by establishing a standard evalution system with the same source so researchers can focus on their proposed method instead of spending significant time to
 reproduce the existing approaches in research
