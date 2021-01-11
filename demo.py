@@ -8,5 +8,5 @@ qa = QA(reader, ranker)
 
 while True:
     q = input('Enter a query: ')
-    results = qa.query(q, num_results=20)
+    results = qa.query(q, num_results=3)
     display(results)

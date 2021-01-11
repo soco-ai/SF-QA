@@ -75,7 +75,7 @@ class CloudBucket(object):
         if not os.path.exists(os.path.join(local_dir, asset_id, 'config.json')):
             self.download_dir(asset_dir, [asset_id], local_dir)
         else:
-            print("Download is canceled since the asset already exists.")
+            pass
 
     def download_file(self, file_dir, file_name, cloud_base_dir='data', local_base_dir='data'):
         """
@@ -97,7 +97,7 @@ class CloudBucket(object):
         if not os.path.exists(os.path.join(local_dir, file_name)):
             self.download(cloud_dir, [file_name], local_dir)
         else:
-            print("Download is canceled since the asset already exists.")
+            pass
 
 
 if __name__ == '__main__':

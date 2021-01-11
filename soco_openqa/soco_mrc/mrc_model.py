@@ -13,6 +13,7 @@ from soco_openqa.cloud_bucket import CloudBucket
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 logging.getLogger("transformers").setLevel(logging.ERROR)
+logging.getLogger("tokenization_utils").setLevel(logging.ERROR)
 
 MODEL_MAP = {
     'MrcModel': AutoModelForQuestionAnswering, 
@@ -50,15 +51,12 @@ class ModelBase(object):
             path = os.path.join('resources', model_id)
             self.cloud_bucket.download_model('mrc-models', model_id)
             model_class = self.__class__.__name__
-            logger.info('class: {}'.format(model_class))
             model = MODEL_MAP[model_class].from_pretrained(path)
             tokenizer = AutoTokenizer.from_pretrained(path, use_fast=True)
 
             device_name, device_ids = self.device_check.get_device_by_model(model_id, n_gpu=self.n_gpu_request)
             self.n_gpu_allocate = len(device_ids)
             device = '{}:{}'.format(device_name, device_ids[0]) if self.n_gpu_allocate == 1 else device_name
-            
-            logger.info('device: {}'.format(device))
 
             if self.fp16 and 'cuda' in device:
                 logger.info('Use fp16')
