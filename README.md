@@ -73,7 +73,7 @@ pip install -r requirements.txt
 ```
 python demo.py
 ```
-
+![](./imgs/demo.gif)
 
 
 ## Usage 2: Reproduce previous research result 
