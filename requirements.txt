@@ -4,7 +4,7 @@ elasticsearch >= 7.0.3
 soco-encoders>=0.2.1
 soco-mrc==0.0.9
 soco-device==0.0.5.2
-pyyaml==5.3.1
+pyyaml==5.4
 yacs==0.1.8
 transformers==2.11.0
 rich==3.7.4.3
