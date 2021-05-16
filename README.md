@@ -20,7 +20,7 @@
 </h3>
 
 # Introduction
-Open-domain QA Evaluation usually means days of tedious work on indexing large scale of data and building the pipeline. That's why we create SF-QA [[paper]](https://arxiv.org/abs/2101.01910).
+Open-domain QA Evaluation usually means days of tedious work on indexing large scale of data and building the pipeline. That's why we create SF-QA [[EACL 2021 Demo paper]](https://www.aclweb.org/anthology/2021.eacl-demos.2/).
 
 We make the evaluation process simple and fast by establishing a standard evalution system with the same source so researchers can focus on their proposed method instead of spending significant time to
 reproduce the existing approaches in research
